@@ -7,9 +7,6 @@ import Login
 import LeaderBoard
 
 
--- model
-
-
 type alias Model =
     { page : Page
     , leaderBoard : LeaderBoard.Model
@@ -26,12 +23,8 @@ initModel =
 
 
 type Page
-    = LeaderBoardPage
-    | LoginPage
-
-
-
--- update
+    = LoginPage
+    | LeaderBoardPage
 
 
 type Msg
@@ -50,19 +43,11 @@ update msg model =
 
         LeaderBoardMsg lbMsg ->
             { model
-                | leaderBoard =
-                    LeaderBoard.update lbMsg model.leaderBoard
+                | leaderBoard = LeaderBoard.update lbMsg model.leaderBoard
             }
 
-        LoginMsg loginMsg ->
-            { model
-                | login =
-                    Login.update loginMsg model.login
-            }
-
-
-
--- view
+        LoginMsg lgMsg ->
+            { model | login = Login.update lgMsg model.login }
 
 
 view : Model -> Html Msg
@@ -84,7 +69,7 @@ view model =
                     [ href "#"
                     , onClick (ChangePage LeaderBoardPage)
                     ]
-                    [ text "LeaderBoard" ]
+                    [ text "Leaderboard" ]
                 , span [] [ text " | " ]
                 , a
                     [ href "#"
@@ -99,8 +84,4 @@ view model =
 
 main : Program Never Model Msg
 main =
-    Html.beginnerProgram
-        { model = initModel
-        , update = update
-        , view = view
-        }
+    Html.beginnerProgram { model = initModel, view = view, update = update }
