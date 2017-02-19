@@ -261,3 +261,6 @@ main =
 
 
 port saveToken : String -> Cmd msg
+
+
+port removeToken : String -> Cmd msg

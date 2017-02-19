@@ -42,6 +42,7 @@ type Msg
     | Submit
     | Error String
     | LoginResponse (Result Http.Error String)
+    | Logout
 
 
 url : String
@@ -78,6 +79,9 @@ update msg model =
                     Http.send LoginResponse request
             in
                 ( model, cmd, Nothing )
+
+        Logout ->
+            ( model, Cmd.none, Nothing )
 
         Error error ->
             ( { model | error = Just error }, Cmd.none, Nothing )
